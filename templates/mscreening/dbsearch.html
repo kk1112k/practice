@@ -1,0 +1,160 @@
+{% extends "partials/base.html" %}
+{% load static %}
+{% block title%}위생허가{% endblock title %}
+{% block extra_css %}
+  <!-- jsvectormap css -->
+  <link href="{% static 'libs/jsvectormap/css/jsvectormap.min.css'%}" rel="stylesheet" type="text/css"/>
+
+  <!--Swiper slider css-->
+  <link href="{% static 'libs/swiper/swiper-bundle.min.css'%}" rel="stylesheet" type="text/css"/>
+
+  <!-- dropzone css -->
+  <link rel="stylesheet" href="{% static 'libs/dropzone/dropzone.css'%}" type="text/css"/>
+
+  <!-- Filepond css -->
+  <link rel="stylesheet" href="{% static 'libs/filepond/filepond.min.css'%}" type="text/css"/>
+  <link rel="stylesheet" href="{% static 'libs/filepond-plugin-image-preview/filepond-plugin-image-preview.min.css'%}">
+
+{% endblock extra_css %}
+{% block content %}
+  <!-- ============================================================== -->
+  <!-- Start right Content here -->
+  <!-- ============================================================== -->
+  <div class="main-content">
+    <div class="page-content">
+      <div class="container-fluid">
+        {% block pagetitle %}
+          {% include "partials/page-title.html" with pagetitle="위생허가 스크리닝" title="DB 검색기" %}
+        {% endblock pagetitle %}
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card" id="orderList">
+              <div class="card-header border-0">
+                <div class="row align-items-center gy-3">
+                  <div class="col-sm">
+                    <h5 class="card-title mb-0">DB 검색기(가제)</h5>
+                  </div>
+                  <div class="col-sm-auto"></div>
+                </div>
+              </div>
+              <div class="card-body border border-dashed border-end-0 border-start-0 mb-3">
+                <!-- <div class="input-group"> <div class="search-box"> <input id="dbSearchGridSearchInput" type="text" class="form-control search" placeholder="검색어를 입력하세요."> <i class="ri-search-line search-icon"></i> </div> <a class="btn btn-primary waves-effect waves-light" id="dbSearchGridSearchBtn">검색</a> </div> -->
+                <div class="row">
+                  <div class="col">
+                    <div class="form-icon search-box">
+                      <input type="text" class="form-control form-control-icon search" id="dbSearchGridSearchInput" placeholder="검색어를 입력하세요.">
+                      <i class="ri-search-line search-icon"></i>
+                    </div>
+                  </div>
+                  <div class="col-auto" style="padding-left: 0;">
+                    <a class="btn btn-primary waves-effect waves-light" id="dbSearchGridSearchBtn">검색</a>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body pt-0">
+                <div class="col-lg-12">
+                  <div id="dbSearchList"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!--end col-->
+      </div>
+      <!--end row-->
+
+    </div>
+    <!-- container-fluid -->
+  </div>
+  <!-- End Page-content -->
+</div>
+<!-- end main content-->
+{% endblock content %}
+{% block extra_js %}
+<script>
+  // grid.js 언어 설정 공통으로 분리 필요
+  const language = {
+    'search': {
+      'placeholder': '검색...'
+    },
+    sort: {
+      sortAsc: '오름차순 정렬',
+      sortDesc: '내림차순 정렬'
+    },
+    'pagination': {
+      'previous': '이전',
+      'next': '다음',
+      of: '전체',
+      to: '~',
+      'showing': ' ',
+      'results': () => '건'
+    },
+    loading: '조회중입니다...',
+    noRecordsFound: '검색 결과가 없습니다.',
+    error: '오류가 발생했습니다.'
+  };
+
+  let dbSearchListGrid = null;
+  const apiUrl = '/mscreening/getDbSearch';
+  // DB 검색기
+  if (document.getElementById("dbSearchList")) {
+    dbSearchListGrid = new gridjs.Grid({
+      sort: true,
+      columns: [
+        {
+          id: 'kr_nm',
+          name: '국문 성분명',
+          width: '33.3%'
+        }, {
+          id: 'cn_nm',
+          name: '중문 성분명',
+          width: '33.3%'
+        }, {
+          id: 'en_nm',
+          name: '영문 성분명',
+          width: '33.3%'
+        }
+      ],
+      pagination: {
+        limit: 10
+      },
+      language,
+      server: {
+        url: apiUrl,
+        then: data => data.results
+      }
+    });
+
+    dbSearchListGrid.render(document.getElementById('dbSearchList'));
+
+    // 검색어 입력 창
+    const serchInputTrigger = document.getElementById('dbSearchGridSearchInput');
+    // 검색버튼
+    const serchBtnTrigger = document.getElementById('dbSearchGridSearchBtn');
+    if (serchInputTrigger) {
+      serchInputTrigger.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+          serchBtnTrigger.click();
+        }
+      });
+    }
+    if (serchBtnTrigger) {
+      serchBtnTrigger.addEventListener('click', function () {
+        // api 주소 변경으로 적용, 다른 방법이 있는지 확인 필요
+        dbSearchListGrid
+          .updateConfig({
+            server: {
+              url: `${apiUrl}?search=${document
+                .getElementById('dbSearchGridSearchInput')
+                .value}`,
+              then: data => data.results
+            }
+          })
+          .forceRender();
+      });
+    }
+  }
+</script>
+{% endblock extra_js %}

@@ -1,0 +1,1419 @@
+{% extends "partials/base.html" %}
+{% load static %}
+{% block title%}Tmall 내륙{% endblock title %}
+{% block extra_css %}
+  <style>
+    .currency-exchange {
+      margin-right: 5px;
+    }
+
+    .currency-exchange.cny::before {
+      content: "¥";
+    }
+
+    .currency-exchange.krw::before {
+      content: "";
+    }
+  </style>
+{% endblock extra_css %}
+{% block content %}
+  <!-- ============================================================== -->
+  <!-- Start right Content here -->
+  <!-- ============================================================== -->
+  <div class="main-content">
+    <div class="page-content">
+      <div class="container-fluid">
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card mt-n4 mx-n4">
+              <div class="bg-soft-warning">
+                <div class="card-body pb-0 px-4">
+                  <div class="row mb-3">
+                    <div class="col-md">
+                      <div class="row align-items-center g-3">
+                        <div class="col-md-auto">
+                          <div class="avatar-md">
+                            <div class="avatar-title bg-white rounded-circle">
+                              <img src="{% static 'images/brands/slack.png'%}" alt="" class="avatar-xs">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md">
+                          <div>
+                            <h4 class="fw-bold">중국 매출대시보드 - Tmall 내륙</h4>
+                            <div class="hstack gap-3 flex-wrap">
+                              <div>
+                                <i class="bx bxs-dashboard align-middle"></i>
+                                중국 매출대시보드</div>
+                              <div class="vr"></div>
+                              <div>기준일 :
+                                <span class="fw-medium">2023-02-10</span></div>
+                              <div class="vr"></div>
+                              <div class="dropdown">
+                                <button type="button" class="btn btn-ghost-secondary d-flex align-items-center" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  <img id="selected-currency-img" data-currency="cny" src="{% static 'images/flags/cn.svg'%}" alt="Header Language" height="20" class="me-2 rounded">
+                                  <p id="selected-currency-title" class="mb-0" style="height: 16px;">RMB중국위안화</p>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                  <!-- item-->
+                                  <a href="javascript:void(0);" class="dropdown-item notify-item py-2 currency-img" title="China" data-title="RMB중국위안화" data-img="{% static 'images/flags/cn.svg'%}" data-currency="cny">
+                                    <img src="{% static 'images/flags/cn.svg'%}" alt="user-image" class="me-2 rounded" height="18">
+                                    <span class="align-middle">RMB중국위안화</span>
+                                  </a>
+                                  <!-- item-->
+                                  <a href="javascript:void(0);" class="dropdown-item notify-item currency-img" title="Korea" data-title="KRW한국원화" data-img="{% static 'images/flags/kr.svg'%}" data-currency="krw">
+                                    <img src="{% static 'images/flags/kr.svg'%}" alt="user-image" class="me-2 rounded" height="18">
+                                    <span class="align-middle">KRW한국원화</span>
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-auto">
+                      <div class="hstack gap-1 flex-wrap">
+                        <button type="button" class="btn py-0 fs-16 favourite-btn active">
+                          <i class="ri-star-fill"></i>
+                        </button>
+                        <button type="button" class="btn py-0 fs-16 text-body">
+                          <i class="ri-share-line"></i>
+                        </button>
+                        <button type="button" class="btn py-0 fs-16 text-body">
+                          <i class="ri-flag-line"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <ul class="nav nav-tabs-custom border-bottom-0" role="tablist">
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link text-body active fw-semibold" data-bs-toggle="tab" href="#saleTab" role="tab" aria-selected="true">
+                        매출
+                      </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link text-body fw-semibold" data-bs-toggle="tab" href="#channelTab" role="tab" aria-selected="false" tabindex="-1">
+                        채널수익
+                      </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link text-body fw-semibold" data-bs-toggle="tab" href="#customerTab" role="tab" aria-selected="false" tabindex="-1">
+                        고객분석
+                      </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link text-body fw-semibold" data-bs-toggle="tab" href="#funnelTab" role="tab" aria-selected="false" tabindex="-1">
+                        퍼널분석
+                      </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link text-body fw-semibold" data-bs-toggle="tab" href="#priceTab" role="tab" aria-selected="false" tabindex="-1">
+                        가격분석
+                      </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link text-body fw-semibold" data-bs-toggle="tab" href="#marketingTab" role="tab" aria-selected="false" tabindex="-1">
+                        마케팅분석
+                      </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link text-body fw-semibold" data-bs-toggle="tab" href="#liveTab" role="tab" aria-selected="false" tabindex="-1">
+                        라이브분석
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <!-- end card body -->
+              </div>
+            </div>
+            <!-- end card -->
+          </div>
+          <!-- end col -->
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="tab-content text-muted">
+              <div class="tab-pane fade show active" id="saleTab" role="tabpanel">
+                <div class="row">
+
+                  <div class="col-xl-4 col-md-6">
+                    <div class="card card-animate g-height-110px">
+                      <div class="d-flex">
+                        <div class="flex-grow-1 p-3">
+                          <h6 class="mb-2 fs-14 d-flex align-items-center">전일매출
+                            <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="안내 문구를 입력 해 주세요."></button>
+                          </h6>
+                          <h5>
+                            <span class="currency-exchange cny"></span>
+                            105</h5>
+                          <p class="mb-0 text-muted">
+                            <span class="badge bg-light text-success mb-0">
+                              <i class="ri-arrow-up-line align-middle"></i>
+                              16.24 %
+                            </span>
+                            vs. previous month</p>
+                        </div>
+                        <div>
+                          <div class="apex-charts" data-colors='["--vz-success" , "--vz-transparent"]' dir="ltr" id="areaChart1"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xl-4 col-md-6">
+                    <div class="card card-animate g-height-110px">
+                      <div class="d-flex">
+                        <div class="flex-grow-1 p-3">
+                          <h6 class="mb-2 fs-14 d-flex align-items-center">전일매출
+                            <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="안내 문구를 입력 해 주세요."></button>
+                          </h6>
+                          <h5>
+                            <span class="currency-exchange cny"></span>
+                            105</h5>
+                          <p class="mb-0 text-muted">
+                            <span class="badge bg-light text-success mb-0">
+                              <i class="ri-arrow-up-line align-middle"></i>
+                              16.24 %
+                            </span>
+                            vs. previous month</p>
+                        </div>
+                        <div>
+                          <div class="apex-charts" data-colors='["--vz-success" , "--vz-transparent"]' dir="ltr" id="areaChart2"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xl-4 col-md-6">
+                    <div class="card card-animate g-height-110px">
+                      <div class="d-flex">
+                        <div class="flex-grow-1 p-3">
+                          <h6 class="mb-2 fs-14 d-flex align-items-center">전일매출
+                            <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="안내 문구를 입력 해 주세요."></button>
+                          </h6>
+                          <h5>
+                            <span class="currency-exchange cny"></span>
+                            105</h5>
+                          <p class="mb-0 text-muted">
+                            <span class="badge bg-light text-success mb-0">
+                              <i class="ri-arrow-up-line align-middle"></i>
+                              16.24 %
+                            </span>
+                            vs. previous month</p>
+                        </div>
+                        <div>
+                          <div class="apex-charts" data-colors='["--vz-success" , "--vz-transparent"]' dir="ltr" id="areaChart3"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xl-4 col-md-6">
+                    <div class="card card-animate g-height-110px">
+                      <div class="d-flex">
+                        <div class="flex-grow-1 p-3">
+                          <h6 class="mb-2 fs-14 d-flex align-items-center">전일매출
+                            <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="안내 문구를 입력 해 주세요."></button>
+                          </h6>
+                          <h5>
+                            <span class="currency-exchange cny"></span>
+                            105</h5>
+                          <p class="mb-0 text-muted">
+                            <span class="badge bg-light text-success mb-0">
+                              <i class="ri-arrow-up-line align-middle"></i>
+                              16.24 %
+                            </span>
+                            vs. previous month</p>
+                        </div>
+                        <div>
+                          <div class="apex-charts" data-colors='["--vz-success" , "--vz-transparent"]' dir="ltr" id="areaChart4"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xl-4 col-md-6">
+                    <div class="card card-animate g-height-110px">
+                      <div class="d-flex">
+                        <div class="flex-grow-1 p-3">
+                          <h6 class="mb-2 fs-14 d-flex align-items-center">전일매출
+                            <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="안내 문구를 입력 해 주세요."></button>
+                          </h6>
+                          <h5>
+                            <span class="currency-exchange cny"></span>
+                            105</h5>
+                          <p class="mb-0 text-muted">
+                            <span class="badge bg-light text-success mb-0">
+                              <i class="ri-arrow-up-line align-middle"></i>
+                              16.24 %
+                            </span>
+                            vs. previous month</p>
+                        </div>
+                        <div>
+                          <div class="apex-charts" data-colors='["--vz-success" , "--vz-transparent"]' dir="ltr" id="areaChart5"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xl-4 col-md-6">
+                    <div class="card card-animate g-height-110px">
+                      <div class="d-flex">
+                        <div class="flex-grow-1 p-3">
+                          <h6 class="mb-2 fs-14 d-flex align-items-center">전일매출
+                            <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="안내 문구를 입력 해 주세요."></button>
+                          </h6>
+                          <h5>
+                            <span class="currency-exchange cny"></span>
+                            105</h5>
+                          <p class="mb-0 text-muted">
+                            <span class="badge bg-light text-success mb-0">
+                              <i class="ri-arrow-up-line align-middle"></i>
+                              16.24 %
+                            </span>
+                            vs. previous month</p>
+                        </div>
+                        <div>
+                          <div class="apex-charts" data-colors='["--vz-success" , "--vz-transparent"]' dir="ltr" id="areaChart6"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xl-4 col-md-6">
+                    <div class="card card-animate overflow-hidden g-height-110px">
+                      <div class="position-absolute start-0" style="z-index: 0;">
+                        <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 200 120" width="200" height="120">
+                          <style>
+                            .s0 {
+                              opacity: 0.05;
+                              fill: var(--vz-secondary);
+                            }
+                          </style>
+                          <path id="Shape 8" class="s0" d="m189.5-25.8c0 0 20.1 46.2-26.7 71.4 0 0-60 15.4-62.3 65.3-2.2 49.8-50.6 59.3-57.8 61.5-7.2 2.3-60.8 0-60.8 0l-11.9-199.4z"/>
+                        </svg>
+                      </div>
+                      <div class="card-body" style="z-index:1 ;">
+                        <div class="d-flex align-items-center">
+                          <div class="flex-grow-1 overflow-hidden">
+                            <h6 class="mb-3 fs-14 d-flex align-items-center">브랜드 매출 순위
+                              <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="안내 문구를 입력 해 주세요."></button>
+                            </h6>
+                            <h5 class="text-success fs-14 mb-0">
+                              <i class="ri-arrow-right-up-line fs-13 align-middle"></i>
+                              +16.24 %
+                            </h5>
+                          </div>
+                          <div class="flex-shrink-0">
+                            <div class="dashboards_rank_image">
+                              <img src="{% static 'images/dashboards/rank.svg'%}" alt=""/>
+                              <h1>3</h1>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- end card body -->
+                    </div>
+                    <!-- end card -->
+                  </div>
+
+                  <div class="col-xl-4 col-md-6">
+                    <div class="card card-animate overflow-hidden g-height-110px">
+                      <div class="position-absolute start-0" style="z-index: 0;">
+                        <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 200 120" width="200" height="120">
+                          <style>
+                            .s0 {
+                              opacity: 0.05;
+                              fill: var(--vz-secondary);
+                            }
+                          </style>
+                          <path id="Shape 8" class="s0" d="m189.5-25.8c0 0 20.1 46.2-26.7 71.4 0 0-60 15.4-62.3 65.3-2.2 49.8-50.6 59.3-57.8 61.5-7.2 2.3-60.8 0-60.8 0l-11.9-199.4z"/>
+                        </svg>
+                      </div>
+                      <div class="card-body" style="z-index:1 ;">
+                        <div class="d-flex align-items-center">
+                          <div class="flex-grow-1 overflow-hidden">
+                            <h6 class="mb-3 fs-14 d-flex align-items-center">한국 브랜드 매출 순위
+                              <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="안내 문구를 입력 해 주세요."></button>
+                            </h6>
+                            <h5 class="text-success fs-14 mb-0">
+                              <i class="ri-arrow-right-up-line fs-13 align-middle"></i>
+                              +16.24 %
+                            </h5>
+                          </div>
+                          <div class="flex-shrink-0">
+                            <div class="dashboards_rank_image">
+                              <img src="{% static 'images/dashboards/rank.svg'%}" alt=""/>
+                              <h1>1</h1>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- end card body -->
+                    </div>
+                    <!-- end card -->
+                  </div>
+
+                  <div class="col-xl-4 col-md-6">
+                    <div class="card card-animate overflow-hidden">
+                      <div class="position-absolute start-0" style="z-index: 0;">
+                        <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 200 120" width="200" height="120">
+                          <style>
+                            .s0 {
+                              opacity: 0.05;
+                              fill: var(--vz-secondary);
+                            }
+                          </style>
+                          <path id="Shape 8" class="s0" d="m189.5-25.8c0 0 20.1 46.2-26.7 71.4 0 0-60 15.4-62.3 65.3-2.2 49.8-50.6 59.3-57.8 61.5-7.2 2.3-60.8 0-60.8 0l-11.9-199.4z"/>
+                        </svg>
+                      </div>
+                      <div class="card-body" style="z-index:1 ;">
+                        <div class="d-flex align-items-center">
+                          <div class="flex-grow-1 overflow-hidden">
+                            <h6 class="mb-2 fs-14 d-flex align-items-center">당해 Target 대비 누적 매출 비용
+                              <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="안내 문구를 입력 해 주세요."></button>
+                            </h6>
+                            <h5 class="mb-0">
+                              <span class="currency-exchange cny"></span>
+                              <span class="counter-value" data-target="123456">0</span></h5>
+                          </div>
+                          <div class="flex-shrink-0">
+                            <div id="progress_radial" data-colors='["--vz-success","--vz-heading-color"]' class="apex-charts" dir="ltr"></div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- end card body -->
+                    </div>
+                    <!-- end card -->
+                  </div>
+                  <!--end col-->
+                </div>
+
+                <div class="row">
+                  <div class="col-xl-6">
+                    <div class="card ">
+                      <div class="card-header border-0 align-items-center d-flex g-height-70px">
+                        <h4 class="card-title mb-0 flex-grow-1">매출정보</h4>
+                        <div class="col-sm-auto">
+                          <div class="input-group">
+                            <input type="text" class="form-control border-0 dash-filter-picker shadow" data-provider="flatpickr" data-range-date="true" data-date-format="Y-m-d" data-deafult-date="2021-02-11 to 2021-02-12">
+                            <div class="input-group-text bg-primary border-primary text-white">
+                              <i class="ri-calendar-2-line"></i>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- end card header -->
+
+                      <div class="card-header p-0 border-0 bg-soft-light">
+                        <div class="row g-0 text-center">
+                          <div class="col-4">
+                            <div class="p-3 border border-dashed border-start-0">
+                              <h5 class="mb-1">
+                                <span class="currency-exchange cny"></span><span class="counter-value" data-target="12345678">0</span></h5>
+                              <p class="text-muted mb-0">당해 누적금액</p>
+                            </div>
+                          </div>
+                          <!--end col-->
+                          <div class="col-4">
+                            <div class="p-3 border border-dashed border-start-0">
+                              <h5 class="mb-1">
+                                <span class="counter-value" data-target="2804">0</span></h5>
+                              <p class="text-muted mb-0">전년도 누적금액</p>
+                            </div>
+                          </div>
+                          <div class="col-4">
+                            <div class="p-3 border border-dashed border-start-0 border-end-0">
+                              <h5 class="mb-1 text-success">
+                                <i class="ri-arrow-right-up-line fs-13 align-middle"></i>
+                                +<span class="counter-value" data-target="20">0</span>
+                                %
+                              </h5>
+                              <p class="text-muted mb-0">증감률</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- end card header -->
+
+                      <div class="card-body">
+                        <!--차트-->
+                        <div id="chart-line-sales" data-colors='["--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-info"]' class="e-charts"></div>
+                      </div>
+                      <!-- end card body -->
+                      <div class="card-footer">
+                        <div id="saleInfoList" class="mt-1 table-card"></div>
+                      </div>
+
+                    </div>
+                    <!-- end card -->
+                  </div>
+                  <!-- end col -->
+                  <div class="col-xl-6">
+                    <div class="card">
+                      <div class="card-header align-items-center d-flex g-height-70px">
+                        <div class="d-flex align-items-center">
+                          <h6 class="card-title mb-0 flex-grow-1">일별 / 시간별 매출 히트맵</h6>
+                        </div>
+                      </div>
+                      <div class="row g-0">
+                        <div class="col-lg-12">
+                          <div class="card-body">
+                            <!--컨텐츠-->
+                            <div class="w-100" style="text-align:center;height:687px;">히트맵</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- end card -->
+
+                  </div>
+                  <!-- end col -->
+                </div>
+                <!--end row-->
+
+                <div class="row">
+                  <div class="col-xl-6">
+                    <div class="card ">
+                      <div class="card-header border-0 align-items-center d-flex g-height-70px">
+                        <h4 class="card-title mb-0 flex-grow-1">환불정보</h4>
+                        <div class="col-sm-auto">
+                          <div class="input-group">
+                            <input type="text" class="form-control border-0 dash-filter-picker shadow" data-provider="flatpickr" data-range-date="true" data-date-format="Y-m-d" data-deafult-date="2021-02-11 to 2021-02-12">
+                            <div class="input-group-text bg-primary border-primary text-white">
+                              <i class="ri-calendar-2-line"></i>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- end card header -->
+
+                      <div class="card-header p-0 border-0 bg-soft-light">
+                        <div class="row g-0 text-center">
+                          <div class="col-4">
+                            <div class="p-3 border border-dashed border-start-0">
+                              <h5 class="mb-1">
+                                <span class="currency-exchange cny"></span><span class="counter-value" data-target="12345678">0</span></h5>
+                              <p class="text-muted mb-0">당해 환불금액</p>
+                            </div>
+                          </div>
+                          <!--end col-->
+                          <div class="col-4">
+                            <div class="p-3 border border-dashed border-start-0">
+                              <h5 class="mb-1">
+                                <span class="counter-value" data-target="2804">0</span></h5>
+                              <p class="text-muted mb-0">전해 환불금액</p>
+                            </div>
+                          </div>
+                          <div class="col-4">
+                            <div class="p-3 border border-dashed border-start-0 border-end-0">
+                              <h5 class="mb-1 text-success">
+                                <i class="ri-arrow-right-up-line fs-13 align-middle"></i>
+                                +<span class="counter-value" data-target="20">0</span>
+                                %
+                              </h5>
+                              <p class="text-muted mb-0">환불 금액 증감률</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row g-0 text-center">
+                          <div class="col-4">
+                            <div class="p-3 border border-dashed border-start-0">
+                              <h5 class="mb-1">
+                                <span class="currency-exchange cny"></span><span class="counter-value" data-target="12345678">0</span></h5>
+                              <p class="text-muted mb-0">당해 환불비중</p>
+                            </div>
+                          </div>
+                          <!--end col-->
+                          <div class="col-4">
+                            <div class="p-3 border border-dashed border-start-0">
+                              <h5 class="mb-1">
+                                <span class="counter-value" data-target="2804">0</span></h5>
+                              <p class="text-muted mb-0">전해 환불비중</p>
+                            </div>
+                          </div>
+                          <div class="col-4">
+                            <div class="p-3 border border-dashed border-start-0 border-end-0">
+                              <h5 class="mb-1 text-danger">
+                                <i class="ri-arrow-right-down-line fs-13 align-middle"></i>
+                                +<span class="counter-value" data-target="20">0</span>
+                                %
+                              </h5>
+                              <p class="text-muted mb-0">환불 비중 증감률</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- end card header -->
+
+                      <div class="card-body">
+                        <!--차트-->
+                        <div id="chart-line-refuned" data-colors='["--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-info"]' class="e-charts"></div>
+                      </div>
+
+                    </div>
+                    <!-- end card -->
+                  </div>
+                  <!-- end col -->
+                  <div class="col-xl-6">
+                    <div class="card">
+                      <div class="card-header align-items-center d-flex g-height-70px">
+                        <h4 class="card-title mb-0 flex-grow-1">환불정보 데이터 뷰어</h4>
+                        <div class="flex-shrink-0">
+                          <div class="dropdown card-header-dropdown">
+                            <a class="text-reset dropdown-btn" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <span class="fw-semibold text-uppercase">표 선택 :
+                              </span><span class="text-muted">전년동기간 대비 누적 매출 증감<i class="mdi mdi-chevron-down ms-1"></i>
+                              </span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                              <a class="dropdown-item" href="javascript:void(0);">전년동기간 대비 누적 매출 증감</a>
+                              <a class="dropdown-item" href="javascript:void(0);">전년동월대비 매출 증감</a>
+                              <a class="dropdown-item" href="javascript:void(0);">월별 환불금액 및 환불 비중</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row g-0">
+                        <div class="col-lg-12">
+                          <div class="card-body">
+                            <!--컨텐츠-->
+                            <div id="refunedPriceList" class="table-card"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- end card -->
+
+                  </div>
+                  <!-- end col -->
+                </div>
+                <!--end row-->
+
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="card" id="customerList">
+                      <div class="card-header border-bottom-dashed">
+
+                        <div class="row g-4 align-items-center">
+                          <div class="col-sm">
+                            <div>
+                              <h5 class="card-title mb-0">채널 내 매출 순위 300위</h5>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                      <div class="card-body border-bottom-dashed border-bottom">
+                        <form>
+                          <div class="row g-3">
+                            <div class="col-xxl-5 col-sm-6">
+                              <div class="search-box">
+                                <input type="text" class="form-control search" placeholder="브랜드명...">
+                                <i class="ri-search-line search-icon"></i>
+                              </div>
+                            </div>
+
+                            <div class="col-xxl-2 col-sm-6">
+                              <input type="text" class="form-control" id="datepicker-range" data-provider="flatpickr" data-date-format="d M, Y" data-range-date="true" placeholder="월 선택">
+                            </div>
+
+                            <div class="col-xxl-2 col-sm-4">
+                              <select class="form-control" data-plugin="choices" data-choices="data-choices" data-choices-search-false="data-choices-search-false" name="국가" id="">
+                                <option value="">국가</option>
+                                <option value="all" selected="selected">전체</option>
+                                <option value="Active">중국</option>
+                                <option value="Block">한국</option>
+                              </select>
+                            </div>
+
+                            <div class="col-xxl-2 col-sm-4">
+                              <select class="form-control" data-plugin="choices" data-choices="data-choices" data-choices-search-false="data-choices-search-false" name="더마여부" id="">
+                                <option value="">더마여부</option>
+                                <option value="all" selected="selected">전체</option>
+                                <option value="Active">더마</option>
+                                <option value="Block">더마 외</option>
+                              </select>
+                            </div>
+
+                            <div class="col-xxl-2 col-sm-4">
+                              <div>
+                                <button type="button" class="btn btn-primary w-100" onclick="SearchData();">
+                                  <i class="ri-equalizer-fill me-2 align-bottom"></i>Filters</button>
+                              </div>
+                            </div>
+                            <!--end col-->
+
+                          </div>
+                          <!--end row-->
+                        </form>
+                      </div>
+                      <div class="card-body">
+                        <div id="channelList" class="table-card"></div>
+                      </div>
+                    </div>
+
+                  </div>
+                  <!--end col-->
+                  <div class="col-lg-6">
+                    <div class="card" id="customerList">
+                      <div class="card-header border-bottom-dashed">
+
+                        <div class="row g-4 align-items-center">
+                          <div class="col-sm">
+                            <div>
+                              <h5 class="card-title mb-0">카테고리별 매출 순위</h5>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                      <div class="card-body border-bottom-dashed border-bottom">
+                        <form>
+                          <div class="row g-3">
+                            <div class="col-xxl-5 col-sm-6">
+                              <div class="search-box">
+                                <input type="text" class="form-control search" placeholder="카테고리명...">
+                                <i class="ri-search-line search-icon"></i>
+                              </div>
+                            </div>
+
+                            <div class="col-xxl-2 col-sm-6">
+                              <input type="text" class="form-control" id="datepicker-range" data-provider="flatpickr" data-date-format="d M, Y" data-range-date="true" placeholder="월 선택">
+                            </div>
+
+                            <div class="col-xxl-2 col-sm-4">
+                              <select class="form-control" data-plugin="choices" data-choices="data-choices" data-choices-search-false="data-choices-search-false" name="국가" id="">
+                                <option value="">국가</option>
+                                <option value="all" selected="selected">전체</option>
+                                <option value="Active">중국</option>
+                                <option value="Block">한국</option>
+                              </select>
+                            </div>
+
+                            <div class="col-xxl-2 col-sm-4">
+                              <select class="form-control" data-plugin="choices" data-choices="data-choices" data-choices-search-false="data-choices-search-false" name="더마여부" id="">
+                                <option value="">더마여부</option>
+                                <option value="all" selected="selected">전체</option>
+                                <option value="Active">더마</option>
+                                <option value="Block">더마 외</option>
+                              </select>
+                            </div>
+
+                            <div class="col-xxl-2 col-sm-4">
+                              <div>
+                                <button type="button" class="btn btn-primary w-100" onclick="SearchData();">
+                                  <i class="ri-equalizer-fill me-2 align-bottom"></i>Filters</button>
+                              </div>
+                            </div>
+                            <!--end col-->
+
+                          </div>
+                          <!--end row-->
+                        </form>
+                      </div>
+                      <div class="card-body">
+                        <div id="categoryList" class="table-card"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--end col-->
+        </div>
+        <!--end row-->
+
+        <!-- container-fluid -->
+      </div>
+      <!-- End Page-content -->
+    </div>
+    <!-- end main content-->
+  {% endblock content %}
+  {% block extra_js %}
+    <script>
+      let options = {
+        series: [
+          {
+            name: "Eathereum",
+            data: [
+              1,
+              21,
+              65,
+              22,
+              35,
+              50,
+              29,
+              44
+            ]
+          }
+        ],
+        chart: {
+          width: 130,
+          height: 110,
+          type: "area",
+          sparkline: {
+            enabled: !0
+          },
+          toolbar: {
+            show: !1
+          }
+        },
+        dataLabels: {
+          enabled: !1
+        },
+        stroke: {
+          curve: "smooth",
+          width: 1.5
+        },
+        fill: {
+          type: "gradient",
+          gradient: {
+            shadeIntensity: 1,
+            inverseColors: !1,
+            opacityFrom: 0.45,
+            opacityTo: 0.05,
+            stops: [50, 100, 100, 100]
+          }
+        },
+        colors: getChartColorsArray("areaChart1")
+      }
+      let areaChart1 = new ApexCharts(document.querySelector("#areaChart1"), options).render()
+      let areaChart2 = new ApexCharts(document.querySelector("#areaChart2"), options).render()
+      let areaChart3 = new ApexCharts(document.querySelector("#areaChart3"), options).render()
+      let areaChart4 = new ApexCharts(document.querySelector("#areaChart4"), options).render()
+      let areaChart5 = new ApexCharts(document.querySelector("#areaChart5"), options).render()
+      let areaChart6 = new ApexCharts(document.querySelector("#areaChart6"), options).render()
+
+      let radialbarOptions = {
+        series: [20],
+        chart: {
+          type: "radialBar",
+          width: 93,
+          sparkline: {
+            enabled: !0
+          }
+        },
+        dataLabels: {
+          enabled: !1
+        },
+        plotOptions: {
+          radialBar: {
+            hollow: {
+              margin: 0,
+              size: "70%"
+            },
+            track: {
+              margin: 1
+            },
+            dataLabels: {
+              show: !0,
+              name: {
+                show: !1
+              },
+              value: {
+                show: !0,
+                fontSize: "16px",
+                fontWeight: 600,
+                offsetY: 8
+              }
+            }
+          }
+        },
+        colors: getChartColorsArray("progress_radial")
+      }
+
+      let radialChart = new ApexCharts(document.querySelector("#progress_radial"), radialbarOptions).render();
+
+      let charLineSalesOption = {
+        tooltip: {
+          trigger: "axis"
+        },
+        legend: {
+          data: [
+            "Email", "Union Ads", "Video Ads", "Direct", "Search Engine"
+          ],
+          textStyle: {
+            color: "#858d98"
+          }
+        },
+        dataZoom: [
+          {
+            show: true,
+            realtime: true,
+            start: 30,
+            end: 70,
+            xAxisIndex: [0, 1]
+          }, {
+            type: 'inside',
+            realtime: true,
+            start: 30,
+            end: 70,
+            xAxisIndex: [0, 1]
+          }
+        ],
+        grid: {
+          left: "0%",
+          right: "0%",
+          bottom: "0%",
+          containLabel: !0
+        },
+        toolbox: {
+          feature: {
+            saveAsImage: {}
+          }
+        },
+        textStyle: {
+          fontFamily: "Poppins, sans-serif"
+        },
+        xAxis: {
+          type: "category",
+          boundaryGap: !1,
+          data: [
+            "Mon",
+            "Tue",
+            "Wed",
+            "Thu",
+            "Fri",
+            "Sat",
+            "Sun"
+          ],
+          axisLine: {
+            lineStyle: {
+              color: "#858d98"
+            }
+          }
+        },
+        yAxis: {
+          type: "value",
+          axisLine: {
+            lineStyle: {
+              color: "#858d98"
+            }
+          },
+          splitLine: {
+            lineStyle: {
+              color: "rgba(133, 141, 152, 0.1)"
+            }
+          }
+        },
+        series: [
+          {
+            name: "Email",
+            type: "line",
+            stack: "Total",
+            data: [
+              120,
+              132,
+              101,
+              134,
+              90,
+              230,
+              210
+            ]
+          }, {
+            name: "Union Ads",
+            type: "line",
+            stack: "Total",
+            data: [
+              220,
+              182,
+              191,
+              234,
+              290,
+              330,
+              310
+            ]
+          }, {
+            name: "Video Ads",
+            type: "line",
+            stack: "Total",
+            data: [
+              150,
+              232,
+              201,
+              154,
+              190,
+              330,
+              410
+            ]
+          }, {
+            name: "Direct",
+            type: "line",
+            stack: "Total",
+            data: [
+              320,
+              332,
+              301,
+              334,
+              390,
+              330,
+              320
+            ]
+          }, {
+            name: "Search Engine",
+            type: "line",
+            stack: "Total",
+            data: [
+              820,
+              932,
+              901,
+              934,
+              1290,
+              1330,
+              1320
+            ]
+          }
+        ],
+
+        color: getChartColorsArray("chart-line-sales")
+      }
+
+      let chartLineSales = echarts.init(document.getElementById("chart-line-sales"));
+      chartLineSales.setOption(charLineSalesOption);
+
+      let charLineRefunedOption = {
+        tooltip: {
+          trigger: "axis"
+        },
+        legend: {
+          data: [
+            "Email", "Union Ads", "Video Ads", "Direct", "Search Engine"
+          ],
+          textStyle: {
+            color: "#858d98"
+          }
+        },
+        dataZoom: [
+          {
+            show: true,
+            realtime: true,
+            start: 30,
+            end: 70,
+            xAxisIndex: [0, 1]
+          }, {
+            type: 'inside',
+            realtime: true,
+            start: 30,
+            end: 70,
+            xAxisIndex: [0, 1]
+          }
+        ],
+        grid: {
+          left: "0%",
+          right: "0%",
+          bottom: "0%",
+          containLabel: !0
+        },
+        toolbox: {
+          feature: {
+            saveAsImage: {}
+          }
+        },
+        textStyle: {
+          fontFamily: "Poppins, sans-serif"
+        },
+        xAxis: {
+          type: "category",
+          boundaryGap: !1,
+          data: [
+            "Mon",
+            "Tue",
+            "Wed",
+            "Thu",
+            "Fri",
+            "Sat",
+            "Sun"
+          ],
+          axisLine: {
+            lineStyle: {
+              color: "#858d98"
+            }
+          }
+        },
+        yAxis: {
+          type: "value",
+          axisLine: {
+            lineStyle: {
+              color: "#858d98"
+            }
+          },
+          splitLine: {
+            lineStyle: {
+              color: "rgba(133, 141, 152, 0.1)"
+            }
+          }
+        },
+        series: [
+          {
+            name: "Email",
+            type: "line",
+            stack: "Total",
+            data: [
+              120,
+              132,
+              101,
+              134,
+              90,
+              230,
+              210
+            ]
+          }, {
+            name: "Union Ads",
+            type: "line",
+            stack: "Total",
+            data: [
+              220,
+              182,
+              191,
+              234,
+              290,
+              330,
+              310
+            ]
+          }, {
+            name: "Video Ads",
+            type: "line",
+            stack: "Total",
+            data: [
+              150,
+              232,
+              201,
+              154,
+              190,
+              330,
+              410
+            ]
+          }, {
+            name: "Direct",
+            type: "line",
+            stack: "Total",
+            data: [
+              320,
+              332,
+              301,
+              334,
+              390,
+              330,
+              320
+            ]
+          }, {
+            name: "Search Engine",
+            type: "line",
+            stack: "Total",
+            data: [
+              820,
+              932,
+              901,
+              934,
+              1290,
+              1330,
+              1320
+            ]
+          }
+        ],
+
+        color: getChartColorsArray("chart-line-refuned")
+      }
+
+      let chartLineRefuned = echarts.init(document.getElementById("chart-line-refuned"));
+      chartLineRefuned.setOption(charLineRefunedOption);
+
+      // 매출정보 그리드
+      if (document.getElementById("saleInfoList")) {
+        new gridjs
+          .Grid({
+            columns: [
+              {
+                name: '',
+                width: '75px'
+              }, {
+                name: '01',
+                width: '60px'
+              }, {
+                name: '02',
+                width: '60px'
+              }, {
+                name: '03',
+                width: '60px'
+              }, {
+                name: '04',
+                width: '60px'
+              }, {
+                name: '05',
+                width: '60px'
+              }, {
+                name: '06',
+                width: '60px'
+              }, {
+                name: '07',
+                width: '60px'
+              }, {
+                name: '08',
+                width: '60px'
+              }, {
+                name: '09',
+                width: '60px'
+              }, {
+                name: '10',
+                width: '60px'
+              }, {
+                name: '11',
+                width: '60px'
+              }, {
+                name: '12',
+                width: '60px'
+              }
+            ],
+            language,
+            style: {
+              th: {
+                'text-align': 'center',
+                'font-size': '12px'
+              },
+              td: {
+                'text-align': 'center',
+                'font-size': '11px'
+              }
+            },
+            data: function () {
+              return new Promise(function (resolve) {
+                setTimeout(function () {
+                  resolve([
+                    [
+                      "올해 2022",
+                      "1",
+                      "2",
+                      "2",
+                      "2",
+                      "2",
+                      "2",
+                      "2",
+                      "2",
+                      "2",
+                      "2",
+                      "2",
+                      "2"
+                    ],
+                    [
+                      "전년도 2021",
+                      "1",
+                      "2",
+                      "2",
+                      "2",
+                      "2",
+                      "2",
+                      "2",
+                      "2",
+                      "2",
+                      "2",
+                      "2",
+                      "2"
+                    ],
+                    [
+                      "YoY",
+                      "1",
+                      "2",
+                      "2",
+                      "2",
+                      "2",
+                      "2",
+                      "2",
+                      "2",
+                      "2",
+                      "2",
+                      "2",
+                      "2"
+                    ],
+                    [
+                      "MoM",
+                      "1",
+                      "2",
+                      "2",
+                      "2",
+                      "2",
+                      "2",
+                      "2",
+                      "2",
+                      "2",
+                      "2",
+                      "2",
+                      "2"
+                    ]
+                  ])
+                }, 2000);
+              });
+            }
+          })
+          .render(document.getElementById("saleInfoList"));
+      }
+
+      // 환불정보 데이터 뷰어
+      if (document.getElementById("refunedPriceList")) {
+        new gridjs
+          .Grid({
+            columns: [
+              {
+                name: '일자'
+              }, {
+                name: '전년도'
+              }, {
+                name: '올해'
+              }, {
+                name: '증감률'
+              }
+            ],
+            language,
+            style: {
+              th: {
+                'text-align': 'center',
+                'font-size': '12px'
+              },
+              td: {
+                'text-align': 'center',
+                'font-size': '11px'
+              }
+            },
+            pagination: {
+              limit: 10
+            },
+            data: function () {
+              return new Promise(function (resolve) {
+                setTimeout(function () {
+                  resolve([
+                    [
+                      "2023-02-11", "1", "2", "2"
+                    ],
+                    [
+                      "2023-02-12", "1", "2", "2"
+                    ],
+                    [
+                      "2023-02-13", "1", "2", "2"
+                    ],
+                    [
+                      "2023-02-14", "1", "2", "2"
+                    ]
+                  ])
+                }, 2000);
+              });
+            }
+          })
+          .render(document.getElementById("refunedPriceList"));
+      }
+
+      // 채널 내 매출 순위 300위
+      if (document.getElementById("channelList")) {
+        new gridjs
+          .Grid({
+            columns: [
+              {
+                name: '순위'
+              }, {
+                name: '브랜드'
+              }, {
+                name: '거래지수'
+              }, {
+                name: '국가'
+              }, {
+                name: '더마여부'
+              }
+            ],
+            language,
+            style: {
+              th: {
+                'text-align': 'center',
+                'font-size': '12px'
+              },
+              td: {
+                'text-align': 'center',
+                'font-size': '11px'
+              }
+            },
+            pagination: {
+              limit: 10
+            },
+            data: function () {
+              return new Promise(function (resolve) {
+                setTimeout(function () {
+                  resolve([
+                    [
+                      "1", "XXX", "10000", "한국", "O"
+                    ],
+                    [
+                      "2", "XXX", "10000", "중국", "O"
+                    ]
+                  ])
+                }, 2000);
+              });
+            }
+          })
+          .render(document.getElementById("channelList"));
+      }
+
+      // 카테고리별 매출 순위
+      if (document.getElementById("categoryList")) {
+        new gridjs
+          .Grid({
+            columns: [
+              {
+                name: '순위'
+              }, {
+                name: '브랜드'
+              }, {
+                name: '거래지수'
+              }, {
+                name: '국가'
+              }, {
+                name: '더마여부'
+              }
+            ],
+            language,
+            style: {
+              th: {
+                'text-align': 'center',
+                'font-size': '12px'
+              },
+              td: {
+                'text-align': 'center',
+                'font-size': '11px'
+              }
+            },
+            pagination: {
+              limit: 10
+            },
+            data: function () {
+              return new Promise(function (resolve) {
+                setTimeout(function () {
+                  resolve([
+                    [
+                      "1", "XXX", "10000", "한국", "O"
+                    ],
+                    [
+                      "2", "XXX", "10000", "중국", "O"
+                    ]
+                  ])
+                }, 2000);
+              });
+            }
+          })
+          .render(document.getElementById("categoryList"));
+      }
+
+      var e = document.getElementsByClassName("currency-img");
+      e && Array
+        .from(e)
+        .forEach(function (t) {
+          t.addEventListener("click", function (e) {
+            document
+              .getElementById("selected-currency-img")
+              .src = t.getAttribute('data-img');
+            document
+              .getElementById("selected-currency-title")
+              .innerText = t.getAttribute('data-title');
+            document
+              .getElementById("selected-currency-img")
+              .dataset
+              .currency = t.getAttribute('data-currency');
+          });
+        });
+    </script>
+  {% endblock extra_js %}

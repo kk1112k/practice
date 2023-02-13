@@ -1,0 +1,951 @@
+{% extends "partials/base.html" %}
+{% load static %}
+{% block title%}위생허가{% endblock title %}
+{% block extra_css %}
+  
+
+{% endblock extra_css %}
+{% block content %}
+  <!-- ============================================================== -->
+  <!-- Start right Content here -->
+  <!-- ============================================================== -->
+  <div class="main-content">
+    <div class="page-content">
+      <div class="container-fluid">
+        {% block pagetitle %}
+          {% include "partials/page-title.html" with title="위생허가 스크리닝" %}
+        {% endblock pagetitle %}
+
+        {% comment %} <div class="row">
+          <div class="col-lg-12">
+            <!-- Nav tabs -->
+            <ul class="nav nav-pills nav-primary mb-3" role="tablist">
+              <li class="nav-item waves-effect waves-light">
+                  <a class="nav-link active" data-bs-toggle="tab" href="#home-1" role="tab">위생허가 스크리닝</a>
+              </li>
+              <li class="nav-item waves-effect waves-light">
+                  <a class="nav-link" data-bs-toggle="tab" href="#profile-1" role="tab">DB 검색기</a>
+              </li>
+            </ul>
+          </div>
+        </div> {% endcomment %}
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-header align-items-center d-flex">
+                <h4 class="card-title mb-0 flex-grow-1 d-flex align-items-center">위생허가 스크리닝 실시
+                  <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="안내 문구를 입력 해 주세요."></button>
+                </h4>
+                <div>
+                  <a class="btn btn-primary btn-md" href="/mscreening/dbsearch">
+                    DB 검색기
+                  </a>
+                </div>
+              </div>
+              <!-- end card header -->
+
+              <div class="card-body">
+                <input type="file" class="filepond filepond-input-multiple" multiple="multiple" name="filepond" data-allow-reorder="true" data-max-file-size="15MB" data-max-files="1">
+              </div>
+              <!-- end card body -->
+            </div>
+            <!-- end card -->
+          </div>
+          <!-- end col -->
+        </div>
+        <!-- end row -->
+
+        <div class="row row-cols-xxl-5 row-cols-xl-4 row-cols-lg-3 row-cols-md-2 row-cols-1">
+          <div class="col">
+            <div class="card py-2 ribbon-box ribbon-fill ribbon-sm card-animate g-min-height-110px">
+              <div class="ribbon ribbon-danger ribbon-base-data d-none">
+              </div>
+                <div name="prob-base-data" class="card-body d-flex card-click">
+                    <div class="flex-grow-1 g-ml-3" style="margin-top: 12px;">
+                      <h6 class="text-dark fs-15 mb-2 d-flex align-items-center">기본정보 오류
+                        <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="위생허가 스크리닝 중 국문, 영문, 중문의 단어가 잘못 입력된 원료 개수를 의미합니다."></button>
+                      </h6>
+                        <h5 class="mb-0 base-err-cnt">4751</h5>
+                    </div>
+                    <div class="avatar-sm flex-shrink-0">
+                        <span class="avatar-title bg-soft-primary rounded fs-3">
+                          <i class="las la-file-alt text-primary"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+          <div class="card py-2 ribbon-box ribbon-fill ribbon-sm card-animate g-min-height-110px">
+            <div class="ribbon ribbon-danger ribbon-cpl-data d-none">
+            </div>
+              <div name="prob-cpl-data" class="card-body d-flex card-click">
+                  <div class="flex-grow-1 g-ml-3 px-2" style="margin-top: 12px;">
+                    <h6 class="text-dark fs-15 mb-2 d-flex align-items-center">원료비중 오류 
+                      <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="위생허가 스크리닝 중 원료비중의 합산 또는 성분비가 잘못 계산되어 있을 경우 문제 있음으로 나타납니다."></button>
+                    </h6>
+                      <h5 class="mb-0 cpl-err">문제 있음</h5>
+                  </div>
+                  <div class="avatar-sm flex-shrink-0">
+                      <span class="avatar-title bg-soft-secondary rounded fs-3">
+                        <i class="las la-flask text-secondary"></i>
+                      </span>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="col">
+        <div class="card py-2 ribbon-box ribbon-fill ribbon-sm card-animate g-min-height-110px">
+          <div class="ribbon ribbon-danger ribbon-hyg-data d-none">
+          </div>
+            <div name="prob-hyg-data" class="card-body d-flex card-click">
+                <div class="flex-grow-1 g-ml-3" style="margin-top: 12px;">
+                  <h6 class="text-dark fs-15 mb-2 d-flex align-items-center">위생허가 규제 
+                    <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="위생허가 스크리닝 중 위생허가 규제에 오류가 있는 경우 문제 있음으로 작성됩니다."></button>
+                  </h6>
+                    <h5 class="mb-0 hyg-err">문제 없음</h5>
+                </div>
+                <div class="avatar-sm flex-shrink-0">
+                    <span class="avatar-title bg-soft-success rounded fs-3">
+                      <i class="las la-certificate text-success"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col">
+      <div class="card py-2 ribbon-box ribbon-fill ribbon-sm card-animate g-min-height-110px">
+        <div class="ribbon ribbon-danger ribbon-cc-data d-none">
+        </div>
+          <div name="prob-cc-data" class="card-body d-flex card-click">
+              <div name="prob-cc-data" class="flex-grow-1 g-ml-3" style="margin-top: 12px;">
+                <h6 class="text-dark fs-15 mb-2 d-flex align-items-center">통관 리스크 
+                  <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Global Cites와 중국위기동식물에 유사단어가 있는 원료 개수를 나타냅니다."></button>
+                </h6>
+                  <h5 class="mb-0 cc-risk">2</h5>
+              </div>
+              <div class="avatar-sm flex-shrink-0">
+                  <span class="avatar-title bg-soft-info rounded fs-3">
+                    <i class="las la-stamp text-info"></i>
+                  </span>
+              </div>
+          </div>
+      </div>
+  </div>
+
+
+  <div class="col">
+    <div class="card py-2 ribbon-box ribbon-fill ribbon-sm card-animate g-min-height-110px">
+      <div class="ribbon ribbon-danger ribbon-mkt-data d-none">
+      </div>
+        <div name="prob-mkt-data" class="card-body d-flex card-click">
+            <div name="prob-mkt-data" class="flex-grow-1 g-ml-3" style="margin-top: 12px;">
+              <h6 class="text-dark fs-15 mb-2 d-flex align-items-center">마케팅 리스크 
+                <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="메이리슈싱, 화해, EWG에서 하나라도 문제가 있는 원료의 개수를 나타냅니다."></button>
+              </h6>
+                <h5 class="mb-0 mkt-risk">0</h5>
+            </div>
+            <div class="avatar-sm flex-shrink-0">
+              <span class="avatar-title bg-soft-warning rounded fs-3">
+                <i class="las la-mobile-alt text-warning"></i>
+              </span>
+          </div>
+        </div>
+    </div>
+</div>
+
+
+          
+        </div>
+        <!--end row-->
+
+        <div class="row">
+          <!-- 좌측 박스 -->
+          <div class="col-xl-6">
+            <div class="card">
+              <div class="card-header align-items-center d-flex g-height-60px">
+                <h4 class="card-title mb-0 flex-grow-1 d-flex align-items-center">파일 정보 확인
+                  <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="안내 문구를 입력 해 주세요."></button>
+                </h4>
+              </div>
+              <!-- end card header -->
+              
+              <div class="card-body">
+                <div class="table-responsive table-card custom-td">
+                  <table class="table align-middle table-nowrap mb-0 custom-table file-info">
+                    <thead class="table-light">
+                      <tr class="text-muted">
+                        <th scope="col" style="width:40%" class="strong">항목</th>
+                        <th scope="col" style="width:10%" class="strong text-center">오류 여부</th>
+                        <th scope="col" style="width:40%;border-left:1px solid var(--vz-border-color);" class="strong">항목</th>
+                        <th scope="col" style="width:10%" class="strong text-center">오류 여부</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <div>
+                            <h5 class="fs-13 mb-0 text-primary">순번</h5>
+                            <p class="fs-13 mb-0 text-muted">序号</p>
+                          </div>
+                        </td>
+                        <td>
+                          <h6 class="mb-0 text-center">
+                            <span class="text-muted"><span class="badge fs-12 seq">정상</span></span>
+                          </h6>
+                        </td>
+                        <td style="border-left:1px solid var(--vz-border-color);">
+                          <h5 class="fs-13 mb-0 text-primary">Korean Name</h5>
+                          <p class="fs-13 mb-0 text-muted">标准韩文名称</p>
+                        </td>
+                        <td style="width:5%;">
+                          <h6 class="mb-0 text-center">
+                            <span class="text-muted"><span class="badge fs-12 kor-name">오류</span></span>
+                          </h6>
+                        </td>
+                      </tr>
+                      <!-- end tr -->
+                      <tr>
+                        <td>
+                          <div>
+                            <h5 class="fs-13 mb-0 text-primary">Chinese Name</h5>
+                            <p class="fs-13 mb-0 text-muted">标准中文名称</p>
+                          </div>
+                        </td>
+                        <td>
+                          <h6 class="mb-0 text-center">
+                            <span class="text-muted"><span class="badge fs-12 chn-name">정상</span></span>
+                          </h6>
+                        </td>
+                        <td style="border-left:1px solid var(--vz-border-color);">
+                          <h5 class="fs-13 mb-0 text-primary">INCI</h5>
+                          <p class="fs-13 mb-0 text-muted">INCI名</p>
+                        </td>
+                        <td>
+                          <h6 class="mb-0 text-center">
+                            <span class="text-muted"><span class="badge fs-12 incl">정상</span></span>
+                          </h6>
+                        </td>
+                      </tr>
+                      <!-- end tr -->
+                      <tr>
+                        <td>
+                          <div>
+                            <h5 class="fs-13 mb-0 text-primary">RM or ingredient % in fla</h5>
+                            <p class="fs-13 mb-0 text-muted">原料含量(%)</p>
+                          </div>
+                        </td>
+                        <td>
+                          <h6 class="mb-0 text-center">
+                            <span class="text-muted"><span class="badge fs-12 fla">정상</span></span>
+                          </h6>
+                        </td>
+                        <td style="border-left:1px solid var(--vz-border-color);">
+                          <h5 class="fs-13 mb-0 text-primary">ingredient % in RM</h5>
+                          <p class="fs-13 mb-0 text-muted">原料中成份含量(%)</p>
+                        </td>
+                        <td>
+                          <h6 class="mb-0 text-center">
+                            <span class="text-muted"><span class="badge fs-12 rm">오류</span></span>
+                          </h6>
+                        </td>
+                      </tr>
+                      <!-- end tr -->
+                      <tr>
+                        <td>
+                          <div>
+                            <h5 class="fs-13 mb-0 text-primary">Actual Wt(%)</h5>
+                            <p class="fs-13 mb-0 text-muted">实际成份含量(%)</p>
+                          </div>
+                        </td>
+                        <td>
+                          <h6 class="mb-0 text-center">
+                            <span class="text-muted"><span class="badge fs-12 actualwt">정상</span></span>
+                          </h6>
+                        </td>
+                        <td style="border-left:1px solid var(--vz-border-color);">
+                          <h5 class="fs-13 mb-0 text-primary">Ingredient function</h5>
+                          <p class="fs-13 mb-0 text-muted">使用目的</p>
+                        </td>
+                        <td>
+                          <h6 class="mb-0 text-center">
+                            <span class="text-muted"><span class="badge fs-12 ingredient">정상</span></span>
+                          </h6>
+                        </td>
+                      </tr>
+                      <!-- end tr -->
+                      <tr>
+                        <td>
+                          <div>
+                            <h5 class="fs-13 mb-0 text-primary">CAS NO.</h5>
+                            <p class="fs-12 mb-0 text-muted">标准中文名称</p>
+                          </div>
+                        </td>
+                        <td>
+                          <h6 class="mb-0 text-center">
+                            <span class="text-muted"><span class="badge fs-12 casno">정상</span></span>
+                          </h6>
+                        </td>
+                        <td style="border-left:1px solid var(--vz-border-color);">
+                          <div>
+                            <h5 class="fs-13 mb-0"></h5>
+                            <p class="fs-12 mb-0 text-muted"></p>
+                          </div>
+                        </td>
+                        <td>
+                          <h6 class="mb-0 text-center">
+                            <span class="text-muted"></span>
+                          </h6>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="2" style="border-right:1px solid var(--vz-border-color);">
+                          <div>
+                            <h5 class="fs-13 mb-0">파일명</h5>
+                            <p class="fs-12 mb-0 text-muted file-name">xxxxxxx</p>
+                          </div>
+                        </td>
+                        <td colspan="2">
+                          <div>
+                            <h5 class="fs-13 mb-0">업로드한 원료 수</h5>
+                            <p class="fs-12 mb-0 text-muted matcnt">50건</p>
+                          </div>
+                        </td>
+                      </tr>
+                      <!-- end tr -->
+                    </tbody>
+                    <!-- end tbody -->
+                  </table>
+                  <!-- end table -->
+                </div>
+              </div>
+
+            </div>
+            <!-- end card -->
+          </div>
+          <!-- end col -->
+
+          <!-- 우측 박스 -->
+          <div class="col-xl-6">
+            <div class="card">
+              <div class="card-header align-items-center d-flex">
+                <h4 class="card-title mb-0 flex-grow-1 d-flex align-items-center prob-info">문제 관련 정보 
+                  <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="안내 문구를 입력 해 주세요."></button>
+                </h4>
+                <div>
+                  <button type="button" class="btn error btn-soft-danger btn-sm">
+                    오류
+                  </button>
+                  <button type="button" class="btn nomal btn-soft-success btn-sm">
+                    정상
+                  </button>
+                  <button type="button" class="btn all btn-soft-primary btn-sm">
+                    전체
+                  </button>
+                </div>
+              </div>
+              <!-- end card header -->
+
+              <div class="card-body">
+                <div id="probDataList" class="table-card"></div>
+              </div>
+              <div class="card-footer card-footer-right" style="display:none;">
+                <div class="fs-14">
+                  챌린지 테스트 여부
+                  <span class="fw-medium challenge">검토 필요</span>
+                </div>
+                <div class="fs-14">
+                  원료 사용목적 오류
+                  <span class="fw-medium materials">검토 필요 없음</span>
+                </div>
+              </div>
+
+            </div>
+            <!-- end card -->
+          </div>
+          <!-- end col -->
+
+        </div>
+        <!-- end row -->
+
+
+<div class="row">
+
+  <!-- 우측 박스 -->
+  <div class="col-xl-12">
+    <div class="card">
+      <div class="card-header align-items-center d-flex">
+        <h4 class="card-title mb-0 flex-grow-1 d-flex align-items-center">스크리닝 결과 다운로드 
+          <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="안내 문구를 입력 해 주세요."></button>
+        </h4>
+        <iframe id="fileDown" style='visibility:hidden' src="" width="1" height="1"></iframe>
+      </div>
+      <!-- end card header -->
+      <div class="card-body">
+        {% comment %} <button type="button" class="btn btn-primary btn-label right"><i class="ri-user-smile-line label-icon align-middle fs-16 ms-2"></i> Primary</button> {% endcomment %}
+        <div class="d-grid"><button class="btn btn-primary btn-download" type="button">스크리닝 결과 다운로드</button></div>
+      </div>
+    </div>
+    <!-- end card -->
+  </div>
+  <!-- end col -->
+
+
+</div>
+
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-header">
+                <h4 class="card-title mb-0 d-flex align-items-center">DB 목록 및 업데이트 일자
+                  <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="안내 문구를 입력 해 주세요."></button>
+                </h4>
+              </div>
+              <!-- end card header -->
+
+              <div class="card-body">
+                <div id="dbUpdateList" class="table-card"></div>
+              </div>
+
+            </div>
+            <!-- end card -->
+          </div>
+          <!-- end col -->
+        </div>
+        <!-- end row -->
+
+      </div>
+      <!-- container-fluid -->
+    </div>
+    <!-- End Page-content -->
+  </div>
+  <!-- end main content-->
+{% endblock content %}
+{% block extra_js %}
+  <script>
+    const probHeaderTitle = {
+      "prob-base-data" : "기본정보 오류 - 관련정보",
+      "prob-cpl-data" : "원료비중 오류 - 관련정보",
+      "prob-hyg-data" : "위생허가 규제 - 관련정보",
+      "prob-cc-data" : "통관 리스크 - 관련정보",
+      "prob-mkt-data" : "마케팅 리스크 - 관련정보",
+    };
+
+    let cardData = {};
+    let cardSelectors = ['.base-err-cnt', '.cpl-err', '.hyg-err', '.cc-risk', '.mkt-risk'];
+    let fileSelectors = ['.seq', '.kor-name', '.chn-name', '.incl', '.fla', '.rm', '.actualwt', '.ingredient', '.casno', '.file-name', '.matcnt'];
+    let cardClick = document.querySelectorAll('.card-click');
+    let headers = [];
+    let column = {};
+    let areaNm = '';
+    let grid = undefined;
+    let uplaodFileName = undefined;
+    let file_id = undefined;
+    const cardFooterRight = document.querySelector('.card-footer-right');
+
+    window.onload = function () {
+
+      var a = "{{file_id}}";
+      // FilePond
+      FilePond.registerPlugin(
+      // encodes the file as base64 data
+      FilePondPluginFileEncode,
+      // validates the size of the file
+      FilePondPluginFileValidateSize,
+      // corrects mobile image orientation
+      FilePondPluginImageExifOrientation,
+      // previews dropped images
+      FilePondPluginImagePreview);
+
+      var inputMultipleElements = document.querySelectorAll('input.filepond-input-multiple');
+      if (inputMultipleElements) {
+
+        // loop over input elements
+        Array
+          .from(inputMultipleElements)
+          .forEach(function (inputElement) { 
+            // create a FilePond instance at the input element location
+            FilePond.create(inputElement, {labelIdle: '파일을 드래그하거나 클릭해서 <span class="filepond--label-action">열기</span>'});
+          })
+
+      }
+
+      /*
+      * file pond callback function
+      * https://pqina.nl/filepond/docs/api/instance/events/
+      */ 
+      const filepond_root = document.querySelector('.filepond--root');
+      filepond_root.addEventListener('FilePond:addfile', e => {
+        uplaodFileName = e.detail.file.filename;
+      });
+      filepond_root.addEventListener('FilePond:processfilerevert', e => {
+        initData();
+      });
+      
+      const btnDownload = document.querySelectorAll('.btn-download');
+      btnDownload.forEach(function(div) {
+        div.addEventListener('click', function(e)  {
+          if (file_id) {
+            var url = window.location.href + "excelDownload?filename=" + file_id;
+            document.getElementById('fileDown').src = url;
+          }
+        })
+      })
+
+      function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+      }
+
+      var csrftoken = getCookie('csrftoken');
+
+      FilePond.setOptions({
+        server: {
+            url: '/fp',
+            headers: {
+              'X-CSRFToken': csrftoken
+            },
+            // process: '/process/',
+            // process: {
+            //     headers: {"X-CSRFToken":csrftoken,},
+            //     url: '/mscreening',
+            //     method: 'POST',
+            // },
+            process: {
+              url: '/process/',
+              method: 'POST',
+              headers: {
+                'X-CSRFToken': csrftoken
+              },
+              withCredentials: false,
+              onload: (response) => {
+                var httpRequest;
+                /* 입력된 데이터 Json 형식으로 변경 */
+                var reqJson = new Object();
+                reqJson.key = response;
+                /* 통신에 사용 될 XMLHttpRequest 객체 정의 */
+                httpRequest = new XMLHttpRequest();
+                /* httpRequest의 readyState가 변화했을때 함수 실행 */
+                  httpRequest.onreadystatechange = () => {
+                    /* readyState가 Done이고 응답 값이 200일 때, 받아온 response로 name과 age를 그려줌 */
+                    if (httpRequest.readyState === XMLHttpRequest.DONE) {
+                        if (httpRequest.status === 200) {
+                        var result = httpRequest.response;
+                          file_id = result["file_id"];
+                          dataBind(result);
+                        } else {
+                          alert('Request Error!');
+                        }
+                    }
+                  };
+                  /* Post 방식으로 요청 */
+                  httpRequest.open('POST', '/mscreening/getExcelParse', true);
+                  /* Response Type을 Json으로 사전 정의 */
+                  httpRequest.responseType = "json";
+                  /* 요청 Header에 컨텐츠 타입은 Json으로 사전 정의 */
+                  httpRequest.setRequestHeader('Content-Type', 'application/json');
+                  httpRequest.setRequestHeader("X-CSRFToken",csrftoken);
+                  /* 정의된 서버에 Json 형식의 요청 Data를 포함하여 요청을 전송 */
+                  httpRequest.send(JSON.stringify(reqJson));
+              },
+              onerror: (response) => {
+                console.log(response.data)
+              },
+            },
+            patch: '/patch/',
+            revert: (uniqueFileId, load, error) => {
+              error('error');
+              load();
+            },
+            fetch: '/fetch/?target=',
+            load: '/load/'
+        }
+      });          
+
+      cardClick.forEach(function(div) {
+        div.addEventListener('click', function(e)  {
+          areaNm = this.getAttribute("name");
+          document.querySelector('.prob-info').setAttribute("data-name", areaNm);
+          document.querySelector('.prob-info').innerText = probHeaderTitle[areaNm];
+          cardFooterRight.style.display = 'none';
+          // 문제 관련 정보 테이블
+          if (document.getElementById("probDataList") && grid && uplaodFileName) {
+
+            if (uplaodFileName) {
+              let filterData = cardData[areaNm];
+              filterData = filterData.filter(function(element){
+                return element[2] == "danger" || element[3] == "danger" || element[4] == "danger";
+              });
+              // 문제 관련 정보 테이블
+              if (document.getElementById("probDataList") && grid) {
+                grid.updateConfig({
+                  columns: infoHeader(areaNm),
+                  data: function () {
+                    return new Promise(function (resolve) {
+                      setTimeout(function () {
+                        resolve(filterData)
+                        // footer 이벤트 처리
+                        if (areaNm == "prob-hyg-data") {
+                          cardFooterRight.style.display = 'block';
+                        } else {
+                          cardFooterRight.style.display = 'none';
+                        }
+                      }, 2000);
+                    });
+                  }
+                }).forceRender();
+              }
+            }
+          }
+        })
+      });
+      
+      let btnSm = document.querySelectorAll('.btn-sm');
+      btnSm.forEach(function(div) {
+        div.addEventListener('click', function(e)  {
+          updateButtonStyle(this.innerText);
+          if (uplaodFileName) {
+            let areaNm = document.querySelector('.prob-info').getAttribute("data-name");
+            let filterData = cardData[areaNm];
+            if (this.classList.contains("error")) {
+              filterData = filterData.filter(function(element){
+                if (element.length == 5) {
+                  return element[2] == "danger" || element[3] == "danger" || element[4] == "danger";
+                } else if (element.length == 4) {
+                  return element[2] == "danger" || element[3] == "danger";
+                }
+              });
+            } else if (this.classList.contains("nomal")) {
+              filterData = filterData.filter(function(element){
+                if (element.length == 5) {
+                  return element[2] == "success" && element[3] == "success" && element[4] == "success";
+                } else if (element.length == 4) {
+                  return element[2] == "success" && element[3] == "success";
+                }
+              });
+            } else {
+              
+            }
+            // 문제 관련 정보 테이블
+            if (document.getElementById("probDataList") && grid) {
+              grid.updateConfig({
+                columns: infoHeader(areaNm),
+                data: filterData
+              }).forceRender();
+            }
+          }
+        })
+      })
+
+      /*
+      * 화면 데이터 초기화
+      */
+      initData();
+
+    }
+
+    function infoHeader(key) {
+      const headerColumns = {
+        "prob-base-data" : [
+          "국문명", "중문명", "영문명"
+        ],
+        "prob-cpl-data" : [
+          "단일성분표", "복합원료", "복합성분표"
+        ],
+        "prob-hyg-data" : [
+          "중국사용불가", "최고역사량", "화장품안전기술"
+        ],
+        "prob-cc-data" : [
+          "Global Cites", "중국위기동식물"
+        ],
+        "prob-mkt-data" : [
+          "EWG", "화해", "메이리슈싱"
+        ]
+      };
+
+      headers = [
+        {
+          name: '순번',
+          width: '10%'
+        }, {
+          name: '성분명',
+          width: headerColumns[key].length == 2 ? '40' : '45' + '%'
+        }
+      ];
+
+      column = {};
+      
+      headerColumns[key].forEach(function(header) {
+        column = {
+                name: header,
+                width: headerColumns[key].length == 2 ? '25' : '15' + '%',
+                formatter: (value) => {
+                  switch(value){
+                    case 'success':
+                    return gridjs.html(`<span class="badge fs-12 badge-soft-success">정상</span>`)
+                    default :
+                    return gridjs.html(`<span class="badge fs-12 badge-soft-danger">오류</span>`)
+                  }
+                }
+              }
+        headers.push(column);
+      });
+
+      return headers;
+    }
+
+    function initData() {
+
+      uplaodFileName = '';
+
+      /*
+      * 상단 카드 데이터 바인딩 초기화
+      */
+      cardSelectors.forEach(function(selector) {
+        document.querySelector(selector).innerText = '';
+      });
+
+      let ribbonDanger = document.querySelectorAll('.ribbon-danger');
+      ribbonDanger.forEach(function(selector) {
+        if (!selector.classList.contains('d-none')) {
+          selector.classList.add('d-none');
+        }
+      });
+
+      /*
+      * 파일 정보 확인 초기화
+      */
+      fileSelectors.forEach(function(selector) {
+        document.querySelector(selector).classList.remove('badge-soft-success');
+        document.querySelector(selector).classList.remove('badge-soft-danger');
+        document.querySelector(selector).innerText = '';
+      });
+
+      /*
+      * 문제 관련 정보 그리드 초기화
+      */
+      updateButtonStyle("init");
+      if (document.getElementById("probDataList")) {
+        document.querySelector('.prob-info').innerText = "문제 관련 정보";
+        document.querySelector('.prob-info').setAttribute("data-name", "prob-base-data");
+        if (grid) {
+          grid.updateConfig({
+            columns: infoHeader("prob-base-data"),
+            data: []
+          }).forceRender();
+        } else {
+            grid = new gridjs
+                  .Grid({
+                    columns: infoHeader("prob-base-data"),
+                    pagination: {
+                      limit: 5
+                    },
+                    style: {
+                      td: {
+                        'text-align': 'center'
+                      }
+                    },
+                    sort: true,
+                    language,
+                    data: []
+                  })
+                  .render(document.getElementById("probDataList"));
+        }
+      };
+    }
+
+    function dataBind(data) {
+      cardData = data;
+      /*
+      * 상단 카드 데이터 바인딩
+      */
+      cardSelectors.forEach(function(selector) {
+        document.querySelector(selector).innerText = data["card-top-data"][selector];
+        switch (selector) {
+          case ".base-err-cnt":
+            if (Number(data["card-top-data"][selector]) > 0) {
+              document.querySelector('.ribbon-base-data').classList.remove('d-none');
+              document.querySelector(selector).classList.add('text-danger');
+            } else {
+              document.querySelector(selector).classList.add('text-muted');
+            }
+            break;
+          case ".cpl-err":
+            if (data["card-top-data"][selector].indexOf("있음") > 0) {
+              document.querySelector('.ribbon-cpl-data').classList.remove('d-none');
+              document.querySelector(selector).classList.add('text-danger');
+            } else {
+              document.querySelector(selector).classList.add('text-success');
+            }
+            break;
+          case ".hyg-err":
+            if (data["card-top-data"][selector].indexOf("있음") > 0) {
+              document.querySelector('.ribbon-hyg-data').classList.remove('d-none');
+              document.querySelector(selector).classList.add('text-danger');
+            } else {
+              document.querySelector(selector).classList.add('text-success');
+            }
+
+            document.querySelector('.challenge').innerText = data["card-top-data"][".challenge"];
+            document.querySelector('.materials').innerText = data["card-top-data"][".materials"];
+
+            if (data["card-top-data"][".challenge"].indexOf("없음") > 0) {
+              document.querySelector('.challenge').classList.add('text-danger');
+            } else {
+              document.querySelector('.challenge').classList.add('text-danger');
+            }
+            if (data["card-top-data"][".materials"].indexOf("없음") > 0) {
+              document.querySelector('.materials').classList.add('text-muted');
+            } else {
+              document.querySelector('.materials').classList.add('text-danger');
+            }
+
+            break;
+          case ".cc-risk":
+            if (Number(data["card-top-data"][selector]) > 0) {
+              document.querySelector('.ribbon-cc-data').classList.remove('d-none');
+              document.querySelector(selector).classList.add('text-danger');
+            } else {
+              document.querySelector(selector).classList.add('text-muted');
+            }
+            break;
+          case ".mkt-risk":
+            if (Number(data["card-top-data"][selector]) > 0) {
+              document.querySelector('.ribbon-mkt-data').classList.remove('d-none');
+              document.querySelector(selector).classList.add('text-danger');
+            } else {
+              document.querySelector(selector).classList.add('text-muted');
+            }
+            break;
+        }
+        
+      });
+
+      /*
+      * 파일 정보 확인
+      */
+      data["file-info"][".file-name"] = uplaodFileName;      
+      fileSelectors.forEach(function(selector) {
+        if (data["file-info"][selector] == "success") {
+          document.querySelector(selector).classList.add('badge-soft-success');
+          document.querySelector(selector).innerText = "정상";
+        } else if (data["file-info"][selector] == "danger") {
+          document.querySelector(selector).classList.add('badge-soft-danger');
+          document.querySelector(selector).innerText = "오류";
+        } else {
+          document.querySelector(selector).innerText = data["file-info"][selector];
+        }
+        
+      });
+
+      /*
+      * 문제 관련 정보 그리드 초기화
+      */
+      if (document.getElementById("probDataList")) {
+        document.querySelector('.prob-info').innerText = probHeaderTitle["prob-base-data"];
+        document.querySelector('.prob-info').setAttribute("data-name", "prob-base-data");
+        if (uplaodFileName) {
+          let filterData = cardData["prob-base-data"];
+          filterData = filterData.filter(function(element){
+            return element[2] == "danger" || element[3] == "danger" || element[4] == "danger";
+          });
+          // 문제 관련 정보 테이블
+          if (document.getElementById("probDataList") && grid) {
+
+            updateButtonStyle("오류");
+
+            grid.updateConfig({
+              columns: infoHeader("prob-base-data"),
+              data: filterData
+            }).forceRender();
+          }
+        }
+      };
+
+    }
+
+    // DB 목록 및 업데이트 일자
+    if (document.getElementById("dbUpdateList")) {
+      new gridjs
+        .Grid({
+          columns: [
+            {
+              name: 'DB 명칭',
+              width: '40%'
+            }, {
+              name: '마지막 업데이트',
+              width: '20%'
+            }, {
+              name: 'DATA 보유량',
+              width: '20%',
+            }, {
+              name: '수시 업데이트 여부',
+              width: '20%'
+            }
+          ],
+          pagination: {
+            limit: 10
+          },
+          sort: true,
+          language,
+          data: function () {
+            return new Promise(function (resolve) {
+              setTimeout(function () {
+                resolve({{dbUpdateList|safe}})
+              }, 2000);
+            });
+          }
+        })
+        .render(document.getElementById("dbUpdateList"));
+    }
+
+    function updateButtonStyle(name) {
+      const buttonClasses = {
+        "오류": ["error", "btn-soft-danger", "btn-danger"],
+        "정상": ["nomal", "btn-soft-success", "btn-success"],
+        "전체": ["all", "btn-soft-primary", "btn-primary"],
+      };
+      if (name == "init") {
+        document.querySelector('.error').classList.remove('btn-danger');
+        document.querySelector('.nomal').classList.remove('btn-success');
+        document.querySelector('.all').classList.remove('btn-primary');
+    
+        document.querySelector('.error').classList.add('btn-soft-danger');
+        document.querySelector('.nomal').classList.add('btn-soft-success');
+        document.querySelector('.all').classList.add('btn-soft-primary');
+      } else {
+        Object.entries(buttonClasses).forEach(([key, classes]) => {
+          const button = document.querySelector(`.${classes[0]}`);
+          if (key !== name) {
+            button.classList.remove(classes[2]);
+            button.classList.add(classes[1]);
+          } else {
+            button.classList.remove(classes[1]);
+            button.classList.add(classes[2]);
+          }
+        });
+      }
+    }
+    
+  </script>
+
+  <!--Swiper slider js-->
+  <script src="{% static 'libs/swiper/swiper-bundle.min.js'%}"></script>
+
+{% endblock extra_js %}

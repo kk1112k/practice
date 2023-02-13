@@ -1,0 +1,132 @@
+{% load static %}
+{% block sidebar %}
+  <!-- ========== App Menu ========== -->
+  <div class="app-menu navbar-menu">
+    <!-- LOGO -->
+    <div class="navbar-brand-box">
+      <!-- Dark Logo-->
+      <a href="{% url 'dashboards:dashboard'%}" class="logo logo-dark">
+        <span class="logo-sm">
+          <img src="{% static 'images/logo-sm.png'%}" alt="" height="22">
+        </span>
+        <span class="logo-lg">
+          <img src="{% static 'images/logo-dark.png'%}" alt="" height="17">
+        </span>
+      </a>
+      <!-- Light Logo-->
+      <a href="{% url 'dashboards:dashboard'%}" class="logo logo-light">
+        <span class="logo-sm">
+          <img src="{% static 'images/logo-sm.png'%}" alt="" height="22">
+        </span>
+        <span class="logo-lg">
+          <img src="{% static 'images/logo-light.png'%}" alt="" height="17">
+        </span>
+      </a>
+      <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover" id="vertical-hover">
+        <i class="ri-record-circle-line"></i>
+      </button>
+    </div>
+
+    <div id="scrollbar">
+      <div class="container-fluid">
+
+        <div id="two-column-menu"></div>
+        <ul class="navbar-nav" id="navbar-nav">
+          <li class="menu-title">
+            <span data-key="t-menu">Menu</span>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link menu-link" href="#sidebarDashboards" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+              <i class="bx bxs-dashboard"></i>
+              <span>중국 매출대시보드</span>
+              <!--data-key="t-dashboards"-->
+            </a>
+            <div class="collapse menu-dropdown" id="sidebarDashboards">
+              <ul class="nav nav-sm flex-column">
+                <li class="nav-item">
+                  <a href="{% url 'dashboards:summary' %}" class="nav-link" data-key="t-summary">
+                    Summary
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% url 'dashboards:tmallchina' %}" class="nav-link" data-key="t-tmall-china">
+                    Tmall 내륙
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% url 'dashboards:tmallglobal' %}" class="nav-link" data-key="t-tmall-global">
+                    Tmall 글로벌
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% url 'dashboards:douyinchina' %}" class="nav-link" data-key="t-douyin-china">
+                    Douyin 내륙
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% url 'dashboards:douyinglobal' %}" class="nav-link" data-key="t-douyin-global">
+                    Douyin 글로벌
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link menu-link" href="#sidebarApps" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarApps">
+              <i class="bx bxs-dashboard"></i>
+              <span data-key="t-review">리뷰분석</span>
+            </a>
+            <div class="collapse menu-dropdown" id="sidebarApps">
+              <ul class="nav nav-sm flex-column">
+                <li class="nav-item">
+                  <a href="#" class="nav-link" data-key="t-summary">
+                    Summary
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link" data-key="t-tmall-china">
+                    Tmall 내륙
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link" data-key="t-tmall-global">
+                    Tmall 글로벌
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link" data-key="t-douyin-china">
+                    Douyin 내륙
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link" data-key="t-douyin-global">
+                    Douyin 글로벌
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link menu-link" id="sidebarMscreening" href="/mscreening" role="button" aria-controls="sidebarMscreening">
+              <i class="bx bx-book-open"></i>
+              <span data-key="t-mscreening">위생허가 스크리닝</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link menu-link" id="sidebarKeywordprod" href="/keywordprod" role="button" aria-controls="sidebarKeywordprod">
+              <i class="bx bx-book-open"></i>
+              <span data-key="t-keyword">검색어기반 상품개발</span>
+            </a>
+          </li>
+          <!-- end Dashboard Menu -->
+
+        </ul>
+      </div>
+      <!-- Sidebar -->
+    </div>
+    <div class="sidebar-background"></div>
+  </div>
+  <!-- Left Sidebar End -->
+  <!-- Vertical Overlay-->
+  <div class="vertical-overlay"></div>
+{% endblock sidebar %}
